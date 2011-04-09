@@ -1,0 +1,40 @@
+[% 
+    htmltitle = 'Events &amp; Meetings' ;
+    title = 'Events & Meetings' ;
+
+    crumb2_name = 'Events' ;
+    crumb2_href = '/events/main' ;
+    crumb1_name = event.title ;
+%]
+
+[% IF event %]
+    <h2>[% event.eventdate %] - [% event.title %]</h2>
+    <p> [% IF event.venuelink %]<a href="[% event.venuelink %]">[% event.venue %],</a>
+        [% ELSE %][% event.venue %],
+        [% END %]
+        [% IF event.addresslink %]<a href="[% event.addresslink %]">[% event.address %]</a>
+        [% ELSE %][% event.address %]
+        [% END %]
+    </p>
+
+    [% event.body %]
+
+    [% IF item.talks %]
+    <h4>Scheduled Talks:</h4>
+    <ul title="currently scheduled talks">
+    [% FOREACH data = item.talks %]
+    <li>[% data.talktitle %]
+    [% END %]
+    </ul>
+    [% END %]
+
+    [% IF event.links %]
+    <h4>Links:</h4>
+    [% event.links %]
+    [% END %]
+
+    [% INCLUDE "events/sponsor-view.html" %]
+
+[% ELSE %]
+    <p align="center">Event not found</p>
+[% END %]
