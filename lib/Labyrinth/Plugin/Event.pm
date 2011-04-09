@@ -195,7 +195,7 @@ sub _get_timer {
 
 =item ShortList()
 
-Proives a list of forthcoming events, with abbreviations as appropriate. 
+Provides a list of forthcoming events, with abbreviations as appropriate. 
 Defaults to 365 days or 20 events, but these limits can be set in the 
 configuration as 'eventsshortlistdays' and 'eventsshortlistcount' respectively.
 
