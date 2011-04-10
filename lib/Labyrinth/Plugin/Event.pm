@@ -40,6 +40,7 @@ use Labyrinth::Plugin::Event::Types;
 # Variables
 
 my $ADAY = 86400;
+my %abbreviations;
 
 # type: 0 = optional, 1 = mandatory
 # html: 0 = none, 1 = text, 2 = textarea
@@ -219,11 +220,18 @@ sub ShortList {
     my $daylimit = $settings{eventsshortlistdays}  || 365;
     my $numlimit = $settings{eventsshortlistcount} || 20;
 
+    unless(%abbreviations) {
+        for(@{ $settings{abbreviations} }) {
+            my ($name,$value) = split(/=/,$_,2);
+            $abbreviations{$name} = $value;
+        }
+    }
+
     my @events;   
     my $events = _events_list($year,$month,$day,$daylimit,$numlimit);
     for my $event (@$events) {
-        for my $abbr (keys %{ $settings{abbreviations} }) {
-            $event->{title} =~ s/$abbr/$settings{abbreviations}{$abbr}/;
+        for my $abbr (keys %abbreviations) {
+            $event->{title} =~ s/$abbr/$abbreviations{$abbr}/;
         }
         $event->{eventdate} =~ s/\s+/&nbsp;/g;
         push @events, $event;
@@ -236,7 +244,6 @@ sub LongList {
     my ($day,$month,$year) = _startdate();
     my $daylimit = $settings{eventslonglistdays};
     my $numlimit = $settings{eventslonglistcount};
-    $year = '2000';
 
     my $eventtypes = Labyrinth::Plugin::Event::Types->new();
 
@@ -314,7 +321,7 @@ sub Item {
     $tvars{event} = $rows[0]    if(@rows);
 
     my @talks = $dbi->GetQuery('hash','GetEventTechTalks',$cgiparams{eventid});
-    $tvars{event}{talks} = \@talks  if(@talks);
+    $tvars{event}{talks} = @talks ? \@talks : undef;
 }
 
 =head1 ADMIN INTERFACE METHODS
@@ -451,8 +458,7 @@ sub Edit {
     $tvars{data}{ddpublish} = PublishSelect($tvars{data}{publish})  if(Authorised(ADMIN));
 
     my @rows = $dbi->GetQuery('hash','GetEventTechTalks',$tvars{data}{eventid});
-    $tvars{data}{talks} = \@rows  if(@rows);
-
+    $tvars{data}{talks} = @rows ? \@rows : undef;
     $tvars{preview} = clone($tvars{data});  # data fields need to be editable
 
     for(keys %fields) {
@@ -495,6 +501,8 @@ sub Copy {
 sub Save {
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
+    $tvars{data}{align} = $cgiparams{ALIGN0};
+
     for(keys %fields) {
         next    unless($fields{$_});
            if($fields{$_}->{html} == 1) { $cgiparams{$_} = CleanHTML($cgiparams{$_}) }
@@ -517,9 +525,10 @@ sub Save {
 
     my %fields = map {$_ => 1} @allfields;
     delete $fields{$_}  for @mandatory;
-    $tvars{data}{$_} ||= undef    for keys %fields;
-
-    $tvars{data}{align} ||= 1;
+    for(keys %fields) {
+        if(/align|id/)  { $tvars{data}{$_} ||= 0; }
+        else            { $tvars{data}{$_} ||= undef; }
+    }
 
     my @fields = (  $tvars{data}{folderid},
                     $tvars{data}{title},

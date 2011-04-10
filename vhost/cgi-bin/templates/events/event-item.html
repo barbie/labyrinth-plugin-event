@@ -3,12 +3,14 @@
     title = 'Events & Meetings' ;
 
     crumb2_name = 'Events' ;
-    crumb2_href = '/events/main' ;
+    crumb2_href = '/event/main' ;
     crumb1_name = event.title ;
 %]
 
 [% IF event %]
     <h2>[% event.eventdate %] - [% event.title %]</h2>
+
+    [% IF event.venue %]
     <p> [% IF event.venuelink %]<a href="[% event.venuelink %]">[% event.venue %],</a>
         [% ELSE %][% event.venue %],
         [% END %]
@@ -16,13 +18,14 @@
         [% ELSE %][% event.address %]
         [% END %]
     </p>
+    [% END %]
 
     [% event.body %]
 
-    [% IF item.talks %]
+    [% IF event.talks %]
     <h4>Scheduled Talks:</h4>
     <ul title="currently scheduled talks">
-    [% FOREACH data = item.talks %]
+    [% FOREACH data = event.talks %]
     <li>[% data.talktitle %]
     [% END %]
     </ul>
