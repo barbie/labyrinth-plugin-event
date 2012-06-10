@@ -33,7 +33,7 @@ CREATE TABLE `events` (
   `align` int(10) unsigned NOT NULL DEFAULT '1',
   `eventdate` varchar(255) DEFAULT NULL,
   `eventtime` varchar(255) DEFAULT NULL,
-  `listdate` varchar(255) DEFAULT NULL,
+  `listdate` int(11) DEFAULT '0',
   `venueid` int(10) unsigned NOT NULL DEFAULT '0',
   `body` blob,
   `links` blob,
@@ -52,7 +52,7 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` VALUES (1,1,1,'Test Conference',1,1,1,'1-3 January 2011','all day','1293840000',1,'<p>This is a test','web links here',NULL,3,1);
+INSERT INTO `events` VALUES (1,1,1,'Test Conference',1,1,1,'1-3 January 2011','all day',1293840000,1,'<p>This is a test','web links here',NULL,3,1);
 
 
 --

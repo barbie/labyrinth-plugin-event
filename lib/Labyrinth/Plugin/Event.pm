@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 use vars qw($VERSION);
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 =head1 NAME
 
@@ -276,10 +276,10 @@ sub _events_list {
         last    if($numlimit && $num > $numlimit);
 
         $row->{snippet}   = $row->{body};
-        $row->{snippet}   =~ s!^(?:.*?)?<p>(.*?)</p>.*$!<p>$1...</p>!si;
-       $row->{shortdate} = $row->{eventdate};
-        $row->{shortdate} =~ s/([A-Za-z]{3}).*/$1/;
-        $row->{links} =~ s!\*!<br />!g;
+        $row->{snippet}   =~ s!^(?:.*?)?<p>(.*?)</p>.*$!<p>$1...</p>!si if($row->{snippet});
+        $row->{shortdate} = $row->{eventdate};
+        $row->{shortdate} =~ s/([A-Za-z]{3}).*/$1/                      if($row->{shortdate});
+        $row->{links} =~ s!\*!<br />!g                                  if($row->{links});
         push @rows, $row;
         $num++;
     }
@@ -622,7 +622,7 @@ Miss Barbell Productions, L<http://www.missbarbell.co.uk/>
 
 =head1 COPYRIGHT & LICENSE
 
-  Copyright (C) 2002-2011 Barbie for Miss Barbell Productions
+  Copyright (C) 2002-2012 Barbie for Miss Barbell Productions
   All Rights Reserved.
 
   This module is free software; you can redistribute it and/or
