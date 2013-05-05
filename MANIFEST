@@ -4,6 +4,7 @@ lib/Labyrinth/Plugin/Event/Sponsors.pm
 lib/Labyrinth/Plugin/Event/Talks.pm
 lib/Labyrinth/Plugin/Event/Types.pm
 lib/Labyrinth/Plugin/Event/Venues.pm
+LICENSE
 Makefile.PL
 MANIFEST
 META.json
