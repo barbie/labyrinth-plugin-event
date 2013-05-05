@@ -11,10 +11,10 @@
     <h2>[% event.eventdate %] - [% event.title %]</h2>
 
     [% IF event.venue %]
-    <p> [% IF event.venuelink %]<a href="[% event.venuelink %]">[% event.venue %],</a>
+    <p> [% IF event.venuelink %]<a href="[% event.venuelink %]" title="link to venue">[% event.venue %],</a>
         [% ELSE %][% event.venue %],
         [% END %]
-        [% IF event.addresslink %]<a href="[% event.addresslink %]">[% event.address %]</a>
+        [% IF event.addresslink %]<a href="[% event.addresslink %]" title="map of venue address">[% event.address %]</a>
         [% ELSE %][% event.address %]
         [% END %]
     </p>

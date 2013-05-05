@@ -9,17 +9,17 @@
 
 [% IF user.access >= 4 %]
 <p>
-      <a href="[% cgipath %]/pages.cgi?act=event-prev">previous events</a>
-    | <a href="[% cgipath %]/pages.cgi?act=event-admin">admin events</a>
-    | <a href="[% cgipath %]/pages.cgi?act=event-add">create an event</a>
+      <a href="[% cgipath %]/pages.cgi?act=event-prev"  title="archived events">previous events</a>
+    | <a href="[% cgipath %]/pages.cgi?act=event-admin" title="admin current events">admin events</a>
+    | <a href="[% cgipath %]/pages.cgi?act=event-add"   title="create an event">create an event</a>
 </p>
 [% END %]
 
 <p>Below are all the events, that we are aware of, that feature talks, tutorials or
 similar regarding CPAN Testers, Perl QA or Perl Testing. If you know of any event not 
-listed here, please send <a href="mailto:barbie@cpan.org">Barbie</a> an email, with a 
-link to the event, or with any further details if you are an organiser of an event,
-and we will add it to our listings, if appropriate.
+listed here, please send <a href="mailto:barbie@cpan.org" title="mail Barbie">Barbie</a> 
+an email, with a link to the event, or with any further details if you are an organiser 
+of an event, and we will add it to our listings, if appropriate.</p>
 
 <!--
 You can now download the latest ICalendar for my appearances.
@@ -37,17 +37,17 @@ You can now download the latest ICalendar for my appearances.
         <hr class="clear-contentunit" />
 <h2>[% item.eventdate %] - [% item.title %]</h2>
     [% IF event.venue %]
-<p> [% IF item.venuelink %]<a href="[% item.venuelink %]">[% item.venue %],</a>
+<p> [% IF item.venuelink %]<a href="[% item.venuelink %]" title="link to [% item.venue %]">[% item.venue %],</a>
     [% ELSE %][% item.venue %],
     [% END %]
-    [% IF item.addresslink %]<br /><a href="[% item.addresslink %]">[% item.address %]</a>
+    [% IF item.addresslink %]<br /><a href="[% item.addresslink %]" title="link to venue address">[% item.address %]</a>
     [% ELSE %][% item.address %]
     [% END %]
 </p>
     [% END %]
 
     [% item.snippet %]
-    <p>... <a href="/event/[% item.eventid %]">read more details</a>.</p>
+    <p>... <a href="/event/[% item.eventid %]" title="read more">read more details</a>.</p>
 
 [% END %]
 

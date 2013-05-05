@@ -16,15 +16,15 @@
 <input type="hidden" name="venueid" value="[% data.venueid %]" />
 <input type="hidden" name="eventid" value="[% data.eventid %]" />
 
-[% IF thanks %]<p>Venue saved successfully.[% END %]
+[% IF thanks %]<p>Venue saved successfully.</p>[% END %]
 <p>Fields marked * are mandatory fields and must be completed.</p>
 
 [% IF errmess %]
 <div class="box">
     [% IF errmess == 1 %]
-    <p class="alert">There are invalid or missing fields, as noted by the <span class="alert">&empty;</span> symbol.
+    <p class="alert">There are invalid or missing fields, as noted by the <span class="alert">&empty;</span> symbol.</p>
     [% ELSE %]
-    <p class="alert">[% errmess %]
+    <p class="alert">[% errmess %]</p>
     [% END %]
 </div>
 [% END %]
@@ -60,8 +60,8 @@
 
 <div class="boxer">
 <table class="blocker">
-<tr><td>Venue:</td><td>[% IF preview.venuelink %]<a href="[% preview.venuelink %]">[% preview.venue %]</a>[% ELSE %][% preview.venue %][% END %]</td></tr>
-<tr><td>Address:</td><td>[% IF preview.addresslink %]<a href="[% preview.addresslink %]">[% preview.address %]</a>[% ELSE %][% preview.address %][% END %]</td></tr>
+<tr><td>Venue:</td><td>[% IF preview.venuelink %]<a href="[% preview.venuelink %]" title="link to venue">[% preview.venue %]</a>[% ELSE %][% preview.venue %][% END %]</td></tr>
+<tr><td>Address:</td><td>[% IF preview.addresslink %]<a href="[% preview.addresslink %]" title="map for venue address">[% preview.address %]</a>[% ELSE %][% preview.address %][% END %]</td></tr>
 </table>
 </div>
 

@@ -18,15 +18,15 @@
 [% FOREACH item = data %]
     <tr><td>[% item.title %]</td>
         <td>[% item.realname %]</td>
-        <td><a href="[% cgipath %]/pages.cgi?act=event-edittalk&amp;talkid=[% item.talkid %]">[% item.talktitle %]</a></td>
+        <td><a href="[% cgipath %]/pages.cgi?act=event-edittalk&amp;talkid=[% item.talkid %]" title="edit talk">[% item.talktitle %]</a></td>
         <td><input type="checkbox" name="LISTED" value="[% item.talkid %]" /></td></tr>
 [% END %]
 
     </table>
 </div>
 
-[% IF norecs %]<p align="center">No venues currently listed[% END %]
+[% IF norecs %]<p align="center">No venues currently listed</p>[% END %]
 
 <p>
-<input type="submit" name='doaction' value='Delete' />
+<input type="submit" name='doaction' value='Delete' /></p>
 </form>

@@ -28,7 +28,7 @@
 <table class="blocker">
 <tr><th class="named">Title *</th>
     <th width="10">[% data.title_err %]</th>
-    <td><input type="text" name="title" value="[% data.title %]" size="55" /></td>
+    <td><input type="text" name="title" value="[% data.title %]" size="55" /></td></tr>
 [% IF editmode == 'Edit' %]
 <tr><th>Posted</th>
     <th></th>
@@ -59,14 +59,14 @@
 <tr><th class="named">Venue</th>
     <th width="10">[% data.venueid_err %]</th>
     <td>[% IF data.venue %][% data.venue %], [% data.address %][% ELSE %]No venue selected[% END %]<br />
-        <a href="[% cgipath %]/pages.cgi?act=venue-edit&amp;eventid=[% data.eventid %]">Add A Venue</a> |
-        <a href="[% cgipath %]/pages.cgi?act=venue-admin">Venue Admin</a><br />
+        <a href="[% cgipath %]/pages.cgi?act=venue-edit&amp;eventid=[% data.eventid %]" title="Add A Venue">Add A Venue</a> |
+        <a href="[% cgipath %]/pages.cgi?act=venue-admin" title="Venue Admin">Venue Admin</a><br />
         [% data.ddvenue %]</td></tr>
 <tr><th>Sponsor</th>
     <th>[% data.sponsorid_err %]</th>
-    <td>[% IF data.sponsor %][% IF data.sponsorlink %]<a href="[% data.sponsorlink %]">[% data.sponsor %]</a>[% ELSE ; data.sponsor ; END ; ELSE %]No sponsor selected[% END %]<br />
-        <a href="[% cgipath %]/pages.cgi?act=spon-edit&amp;eventid=[% data.eventid %]">Add A Sponsor</a> |
-        <a href="[% cgipath %]/pages.cgi?act=spon-admin">Sponsor Admin</a><br />
+    <td>[% IF data.sponsor %][% IF data.sponsorlink %]<a href="[% data.sponsorlink %]" title="link to [% data.sponsor %]">[% data.sponsor %]</a>[% ELSE ; data.sponsor ; END ; ELSE %]No sponsor selected[% END %]<br />
+        <a href="[% cgipath %]/pages.cgi?act=spon-edit&amp;eventid=[% data.eventid %]" title="Add A Sponsor">Add A Sponsor</a> |
+        <a href="[% cgipath %]/pages.cgi?act=spon-admin" title="Sponsor Admin">Sponsor Admin</a><br />
         [% data.ddsponsor %]</td></tr>
 </table>
 
@@ -86,12 +86,12 @@
 <table class="blocker">
 <tr><th class="named">Talks</th>
     <th width="10"></th>
-    <td><a href="[% cgipath %]/pages.cgi?act=event-addtalk&amp;eventid=[% data.eventid %]">Add A Talk</a> |
-        <a href="[% cgipath %]/pages.cgi?act=event-listtalk">Talk Admin</a>
+    <td><a href="[% cgipath %]/pages.cgi?act=event-addtalk&amp;eventid=[% data.eventid %]" title="Add A Talk">Add A Talk</a> |
+        <a href="[% cgipath %]/pages.cgi?act=event-listtalk" title="Talk Admin">Talk Admin</a>
 [% IF data.talks %]
         <ul>
 [% FOREACH talk = data.talks %]
-        <li><a href="[% cgipath %]/pages.cgi?act=event-edittalk&amp;talkid=[% talk.talkid %]">[% talk.talktitle %]</a> [[% talk.realname || 'no name' %]]</li>
+        <li><a href="[% cgipath %]/pages.cgi?act=event-edittalk&amp;talkid=[% talk.talkid %]" title="edit [% talk.talktitle %]">[% talk.talktitle %]</a> [[% talk.realname || 'no name' %]]</li>
 [% END %]
         </ul>
 [% END %]

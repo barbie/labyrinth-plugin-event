@@ -5,10 +5,10 @@
 [% END %]
 
 <h2>[% preview.eventdate %] - [% preview.title %]</h2>
-<p> [% IF preview.venuelink %]<a href="[% preview.venuelink %]">[% preview.venue %],</a>
+<p> [% IF preview.venuelink %]<a href="[% preview.venuelink %]" title="link to venue">[% preview.venue %],</a>
     [% ELSE %][% preview.venue %],
     [% END %]
-    [% IF preview.addresslink %]<br /><a href="[% preview.addresslink %]">[% preview.address %]</a>
+    [% IF preview.addresslink %]<br /><a href="[% preview.addresslink %]" title="map of venue address">[% preview.address %]</a>
     [% ELSE %][% preview.address %]
     [% END %]
 </p>

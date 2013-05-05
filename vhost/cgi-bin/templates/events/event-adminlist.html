@@ -13,13 +13,13 @@
 <input type="hidden" name='eventid' value='' />
 
 <p>
-    <a href="[% cgipath %]/pages.cgi?act=venue-admin">Venue Admin</a> |
-    <a href="[% cgipath %]/pages.cgi?act=spon-admin">Sponsor Admin</a>
+    <a href="[% cgipath %]/pages.cgi?act=venue-admin" title="Venue Admin">Venue Admin</a> |
+    <a href="[% cgipath %]/pages.cgi?act=spon-admin" title="Sponsor Admin">Sponsor Admin</a>
 </p>
 
 <p>Search: [% ddtypes %] [% ddpublish %] <input type="submit" value='GO' />
-| <a href="[% cgipath %]/pages.cgi?act=event-admin">view all</a>
-| <a href="[% cgipath %]/pages.cgi?act=event-add">create an event</a></p>
+| <a href="[% cgipath %]/pages.cgi?act=event-admin" title="view all events">view all</a>
+| <a href="[% cgipath %]/pages.cgi?act=event-add" title="create an event">create an event</a></p>
 
 <table class="blocker">
 <tr><th>Date</th>
@@ -31,8 +31,8 @@
 [% FOREACH item = data %]
 <tr><td>[% item.createdate %]</td>
     <td>[% item.eventtype %]</td>
-    <td>[% IF item.publish == 4 %]<a href="[% cgipath %]/pages.cgi?act=event-view&amp;eventid=[% item.eventid %]">[% item.title %]</a>
-        [% ELSE %]<a href="[% cgipath %]/pages.cgi?act=event-edit&amp;eventid=[% item.eventid %]">[% item.title %]</a>[% END %]</td>
+    <td>[% IF item.publish == 4 %]<a href="[% cgipath %]/pages.cgi?act=event-view&amp;eventid=[% item.eventid %]" title="view event">[% item.title %]</a>
+        [% ELSE %]<a href="[% cgipath %]/pages.cgi?act=event-edit&amp;eventid=[% item.eventid %]" title="edit event">[% item.title %]</a>[% END %]</td>
     <td>[% item.publishstate %]</td>
     <td><input type="checkbox" name="LISTED" value="[% item.eventid %]" /></td>
 </tr>

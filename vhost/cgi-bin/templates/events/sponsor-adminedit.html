@@ -13,15 +13,15 @@
 <input type="hidden" name='act' value='spon-save' />
 <input type="hidden" name="sponsorid" value="[% data.sponsorid %]" />
 
-[% IF thanks %]<p>Sponsor saved successfully.[% END %]
+[% IF thanks %]<p>Sponsor saved successfully.</p>[% END %]
 <p>Fields marked * are mandatory fields and must be completed.</p>
 
 [% IF errmess %]
 <div class="box">
     [% IF errmess == 1 %]
-    <p class="alert">There are invalid or missing fields, as noted by the <span class="alert">&empty;</span> symbol.
+    <p class="alert">There are invalid or missing fields, as noted by the <span class="alert">&empty;</span> symbol.</p>
     [% ELSE %]
-    <p class="alert">[% errmess %]
+    <p class="alert">[% errmess %]</p>
     [% END %]
 </div>
 [% END %]
@@ -52,7 +52,7 @@
 
 <div class="boxer">
 <table class="blocker">
-<tr><td>Sponsor:</td><td>[% IF data.sponsorlink %]<a href="[% data.sponsorlink %]">[% data.sponsor %]</a>[% ELSE %][% data.sponsor %][% END %]</td></tr>
+<tr><td>Sponsor:</td><td>[% IF data.sponsorlink %]<a href="[% data.sponsorlink %]" title="link to sponsor">[% data.sponsor %]</a>[% ELSE %][% data.sponsor %][% END %]</td></tr>
 </table>
 </div>
 
