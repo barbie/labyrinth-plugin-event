@@ -15,7 +15,7 @@ WriteMakefile(
     PREREQ_PM           => {
 
         # prereqs
-        'Labyrinth'                             => '5.04',
+        'Labyrinth'                             => '5.17',
         'Labyrinth::Plugin::Articles::Sections' => '5.06',
         'Clone'                                 => '0',
         'Time::Local'                           => '0',

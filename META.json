@@ -27,16 +27,16 @@
                 "Test::More": "0.70"
             },
             "recommends": {
-                "Test::Pod": "1.00",
-                "Test::Pod::Coverage": "0.08",
                 "Test::CPAN::Meta": "0",
-                "Test::CPAN::Meta::JSON": "0"
+                "Test::CPAN::Meta::JSON": "0",
+                "Test::Pod": "1.00",
+                "Test::Pod::Coverage": "0.08"
             }
         },
         "runtime" : {
             "requires" : {
               "perl": "5.006",
-              "Labyrinth": "5.04",
+              "Labyrinth": "5.17",
               "Labyrinth::Plugin::Articles::Sections": "5.06",
               "Clone": "0",
               "Time::Local": "0"

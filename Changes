@@ -4,6 +4,7 @@ Changes for the Labyrinth-Plugin-Events
         - test suite update.
         - added LICENSE file.
         - template updates.
+        - upgrade to Labyrinth 5.17.
 
 1.02    2012-06-10
         - fixed substitutions on undefined variables.
