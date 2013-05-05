@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 use vars qw($VERSION);
-$VERSION = '1.02';
+$VERSION = '1.03';
 
 =head1 NAME
 
@@ -81,6 +81,8 @@ Save the current talk.
 Delete a talk.
 
 =item EventSelect
+
+Provides a dropdown list of events available.
 
 =back
 
@@ -175,7 +177,6 @@ sub EventSelect {
     unshift @list, { id => 0, value => 'Select Event'}  if($blank == 1);
     DropDownRows($opt,'eventid','id','value',@list);
 }
-
 
 1;
 

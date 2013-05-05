@@ -1,6 +1,6 @@
 {
     "name": "Labyrinth::Plugin::Event",
-    "version": "1.02",
+    "version": "1.03",
     "abstract": "Event plugin for the Labyrinth framework",
     "author": [
         "Barbie (BARBIE) <barbie@cpan.org>"
@@ -47,23 +47,23 @@
     "provides": {
         "Labyrinth::Plugin::Event": {
             "file": "lib/Labyrinth/Plugin/Event.pm",
-            "version": "1.02"
+            "version": "1.03"
         },
         "Labyrinth::Plugin::Event::Sponsors": {
             "file": "lib/Labyrinth/Plugin/Event/Sponsors.pm",
-            "version": "1.02"
+            "version": "1.03"
         },
         "Labyrinth::Plugin::Event::Talks": {
             "file": "lib/Labyrinth/Plugin/Event/Talks.pm",
-            "version": "1.02"
+            "version": "1.03"
         },
         "Labyrinth::Plugin::Event::Types": {
             "file": "lib/Labyrinth/Plugin/Event/Types.pm",
-            "version": "1.02"
+            "version": "1.03"
         },
         "Labyrinth::Plugin::Event::Venues": {
             "file": "lib/Labyrinth/Plugin/Event/Venues.pm",
-            "version": "1.02"
+            "version": "1.03"
         }
     },
     "no_index": {
