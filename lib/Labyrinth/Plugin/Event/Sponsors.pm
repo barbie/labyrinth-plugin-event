@@ -105,7 +105,7 @@ Delete a sponsor.
 =cut
 
 sub Admin {
-    return  unless AccessUser(ADMIN);
+    return  unless AccessUser(EDITOR);
 
     if($cgiparams{doaction}) {
         if($cgiparams{doaction} eq 'Delete') { Delete(); }
@@ -116,7 +116,7 @@ sub Admin {
 }
 
 sub Add {
-    return  unless AccessUser(ADMIN);
+    return  unless AccessUser(EDITOR);
     $tvars{data} = {
         sponsor     => 'Sponsor',
         sponsorlink => ''
@@ -124,13 +124,13 @@ sub Add {
 }
 
 sub Edit {
-    return  unless AccessUser(ADMIN);
-    return  unless AuthorCheck('GetSponsorByID',$INDEXKEY,ADMIN);
+    return  unless AccessUser(EDITOR);
+    return  unless AuthorCheck('GetSponsorByID',$INDEXKEY,EDITOR);
 }
 
 sub Save {
-    return  unless AccessUser(ADMIN);
-    return  unless AuthorCheck('GetSponsorByID',$INDEXKEY,ADMIN);
+    return  unless AccessUser(EDITOR);
+    return  unless AuthorCheck('GetSponsorByID',$INDEXKEY,EDITOR);
 
     return  if FieldCheck(\@allfields,\@mandatory);
 

@@ -87,7 +87,7 @@ Delete a talk.
 =cut
 
 sub Admin {
-    return  unless AccessUser(ADMIN);
+    return  unless AccessUser(EDITOR);
 
     if($cgiparams{doaction}) {
         if($cgiparams{doaction} eq 'Delete') { Delete(); }
@@ -98,16 +98,16 @@ sub Admin {
 }
 
 sub Add {
-    return  unless AccessUser(ADMIN);
-    return  unless AuthorCheck('GetEventByID','eventid',ADMIN);
+    return  unless AccessUser(EDITOR);
+    return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
     $tvars{data}{ddusers}  = UserSelect(0,1,0,'Speaker',1);
     $tvars{data}{ddevents} = EventSelect($cgiparams{eventid});
 }
 
 sub Edit {
-    return  unless AccessUser(ADMIN);
-    return  unless AuthorCheck('GetEventByID','eventid',ADMIN);
+    return  unless AccessUser(EDITOR);
+    return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
     if($cgiparams{talkid}) {
         my @rows = $dbi->GetQuery('hash','GetTechTalkByID',$cgiparams{talkid});
@@ -123,8 +123,8 @@ sub Edit {
 }
 
 sub Save {
-    return  unless AccessUser(ADMIN);
-    return  unless AuthorCheck('GetEventByID','eventid',ADMIN);
+    return  unless AccessUser(EDITOR);
+    return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
     my $opt = $cgiparams{talkid} ? $tvars{data}{userid} : 0;
     $tvars{data}{ddusers}  = UserSelect($opt,1,0,'Speaker',1);

@@ -25,7 +25,6 @@ use base qw(Labyrinth::Plugin::Base);
 
 use Labyrinth::MLUtils;
 use Labyrinth::Variables;
-use Carp;
 
 # -------------------------------------
 # Variables
@@ -59,7 +58,7 @@ Provides a dropdown list of event types available.
 
 sub AUTOLOAD {
     my $self = shift;
-    ref($self) or croak "$self is not an object";
+    ref($self) or die "$self is not an object";
 
     my $name = $AUTOLOAD;
     $name =~ s/.*://; # strip fully-qualified portion
@@ -74,9 +73,10 @@ sub AUTOLOAD {
 
 sub EventType {     
     my ($self,$type) = @_;
+
     unless(%eventtypes) {
         my @rows = $dbi->GetQuery('hash','AllEventTypes');
-        for my $row (@rows) { $eventtypes{$row->{eventtypeid}} = $row->{eventtype}; }
+        $eventtypes{$_->{eventtypeid}} = $_->{eventtype}    for(@rows);
     }
 
     return $eventtypes{$type} || '';
@@ -88,7 +88,7 @@ sub EventTypeSelect {
 
     unless(%eventtypes) {
         my @rows = $dbi->GetQuery('hash','AllEventTypes');
-        for my $row (@rows) { $eventtypes{$row->{eventtypeid}} = $row->{eventtype}; }
+        $eventtypes{$_->{eventtypeid}} = $_->{eventtype}    for(@rows);
     }
 
     my @list = map { { 'id' => $_, 'value' => $eventtypes{$_} } } sort keys %eventtypes;
