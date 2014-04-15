@@ -1,5 +1,5 @@
 --- #YAML:1.0
-name:                     Labyrinth-Plugin-Events
+name:                     Labyrinth-Plugin-Event
 version:                  1.04
 abstract:                 Event plugin for the Labyrinth framework
 author:
