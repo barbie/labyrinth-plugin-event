@@ -1,6 +1,8 @@
 Changes for the Labyrinth-Plugin-Event
 ======================================
 
+        - fixed license fields in META.json to be lists.
+
 1.04    2014-04-15
         - fixed distribution name in META (thanks Neil).
 
