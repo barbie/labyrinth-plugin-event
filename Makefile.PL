@@ -8,7 +8,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     AUTHOR              => 'Barbie <barbie@cpan.org>',
-    NAME                => 'Labyrinth-Plugin-Event',
+    NAME                => 'Labyrinth::Plugin::Event',
     VERSION_FROM        => 'lib/Labyrinth/Plugin/Event.pm',
     ABSTRACT            => 'Event plugin for the Labyrinth framework',
     NO_META             => 1,
