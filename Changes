@@ -5,6 +5,7 @@ Changes for the Labyrinth-Plugin-Event
         - extended META test suite.
         - sponsorid is not mandatory for new sponsors.
         - DeleteSponsors requires a list.
+        - added test data files.
 
 1.04    2014-04-15
         - fixed distribution name in META (thanks Neil).
