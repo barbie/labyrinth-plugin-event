@@ -36,7 +36,7 @@ use Labyrinth::Variables;
 
 
 my %fields = (
-    sponsorid   => { type => 1, html => 0 },
+    sponsorid   => { type => 0, html => 0 },
     sponsor     => { type => 1, html => 1 },
     sponsorlink => { type => 0, html => 1 },
 );
@@ -140,8 +140,9 @@ sub Save {
         elsif($fields{$_}->{html} == 2) { $tvars{data}->{$_} = CleanTags($tvars{data}->{$_}) }
     }
 
-    my @fields = (  $tvars{data}->{sponsor},
-                    $tvars{data}->{sponsorlink}
+    my @fields = (  
+        $tvars{data}->{sponsor},
+        $tvars{data}->{sponsorlink}
     );
 
     if($cgiparams{$INDEXKEY})
@@ -152,6 +153,7 @@ sub Save {
 sub Delete {
     return  unless AccessUser(ADMIN);
     my @ids = CGIArray('LISTED');
+
     return  unless @ids;
 
     $dbi->DoQuery('DeleteSponsors',{ids => join(',',@ids)});
