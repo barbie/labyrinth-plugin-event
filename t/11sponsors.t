@@ -6,9 +6,6 @@ use Labyrinth::Plugin::Event::Sponsors;
 use Labyrinth::Test::Harness;
 use Test::More tests => 36;
 
-my $test_vars = {
-};
-
 my $test_data = { 
     add => {
         'sponsorlink' => '',
