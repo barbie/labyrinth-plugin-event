@@ -100,14 +100,18 @@ sub Admin {
 }
 
 sub Add {
+    my $self = shift;
+
     return  unless AccessUser(EDITOR);
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
     $tvars{data}{ddusers}  = UserSelect(0,1,0,'Speaker',1);
-    $tvars{data}{ddevents} = EventSelect($cgiparams{eventid});
+    $tvars{data}{ddevents} = $self->EventSelect($cgiparams{eventid});
 }
 
 sub Edit {
+    my $self = shift;
+
     return  unless AccessUser(EDITOR);
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
@@ -121,7 +125,7 @@ sub Edit {
 
     my $opt = $cgiparams{talkid} ? $tvars{data}{userid} : 0;
     $tvars{data}{ddusers}  = UserSelect($opt,1,0,'Speaker',1);
-    $tvars{data}{ddevents} = EventSelect($cgiparams{eventid});
+    $tvars{data}{ddevents} = $self->EventSelect($cgiparams{eventid});
 }
 
 sub Save {
@@ -168,7 +172,7 @@ sub Delete {
 }
 
 sub EventSelect {
-    my ($opt,$blank) = @_;
+    my ($self,$opt,$blank) = @_;
     $blank ||= 0;
 
     my @list;

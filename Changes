@@ -7,6 +7,7 @@ Changes for the Labyrinth-Plugin-Event
         - DeleteSponsors requires a list.
         - added test data files.
         - added sponsor tests.
+        - EventSelect is now an object method.
 
 1.04    2014-04-15
         - fixed distribution name in META (thanks Neil).
