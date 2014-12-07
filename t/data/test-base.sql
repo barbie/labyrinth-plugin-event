@@ -143,3 +143,48 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` VALUES (1,5,1,'Barbie','Barbie','barbie@example.com','admin',sha1('test'),'','',1);
 INSERT INTO `users` VALUES (2,1,1,'Guest','guest','GUEST','public','c8d6ea7f8e6850e9ed3b642900ca27683a257201',NULL,NULL,0);
+
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE `articles` (
+  `articleid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `folderid` int(10) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(255) DEFAULT NULL,
+  `userid` int(10) unsigned NOT NULL DEFAULT '0',
+  `createdate` varchar(255) DEFAULT NULL,
+  `sectionid` int(10) unsigned NOT NULL DEFAULT '0',
+  `quickname` varchar(32) DEFAULT NULL,
+  `snippet` varchar(255) DEFAULT NULL,
+  `imageid` int(10) unsigned DEFAULT '1',
+  `front` int(1) DEFAULT '0',
+  `latest` int(1) DEFAULT '0',
+  `publish` int(4) DEFAULT NULL,
+  PRIMARY KEY (`articleid`),
+  INDEX FLDIX (`folderid`),
+  INDEX USRIX (`userid`),
+  INDEX SECIX (`sectionid`),
+  INDEX NAMIX (`quickname`),
+  INDEX PUBIX (`publish`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `mxarticles`;
+CREATE TABLE `mxarticles` (
+  `articleid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `metadata` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`articleid`,`metadata`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `paragraphs`;
+CREATE TABLE `paragraphs` (
+  `paraid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `articleid` int(10) unsigned NOT NULL DEFAULT '0',
+  `orderno` int(4) DEFAULT NULL,
+  `type` int(4) DEFAULT NULL,
+  `imageid` int(10) unsigned NOT NULL DEFAULT '0',
+  `href` varchar(255) DEFAULT NULL,
+  `body` blob,
+  `align` int(4) DEFAULT NULL,
+  PRIMARY KEY (`paraid`),
+  INDEX ARTIX (`articleid`),
+  INDEX IMGIX (`imageid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
