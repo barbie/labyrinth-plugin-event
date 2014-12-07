@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 62;
+use Test::More tests => 63;
 
 my $test_data = { 
     next0 => {
@@ -778,7 +778,7 @@ my $test_data = {
         'listdate' => '1442098800',
         'href' => undef,
         'venueid' => '1',
-        'eventid' => '7',
+        'eventid' => '8',
         'folderid' => '0',
         'body' => 'A Big Event',
         'ddvenue' => '<select id="venueid" name="venueid"><option value="0">Select A Venue</option><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1" selected="selected">To Be Confirmed</option><option value="2">University of Westminster</option></select>',
@@ -825,7 +825,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 62  unless($res);
+    skip "Unable to prep the test environment", 63  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -1050,6 +1050,11 @@ _startdate
     $loader->login( 1 );
     $res = is($loader->action('Event::Admin'),1);
     diag($loader->error)    unless($res);
+    my $params = $loader->params;
+    is($params->{eventid},8,'new event created from copy');
+    $loader->clear;
+    $loader->refresh( \@plugins, {}, { eventid => 8 } );
+    $loader->login( 1 );
     $res = is($loader->action('Event::Edit'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
