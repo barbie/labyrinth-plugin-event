@@ -15,6 +15,7 @@ t/10events.t
 t/11sponsors.t
 t/12talks.t
 t/13types.t
+t/14venues.t
 t/90podtest.t
 t/91podcover.t
 t/94metatest.t
