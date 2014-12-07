@@ -833,19 +833,6 @@ SKIP: {
     # -------------------------------------------------------------------------
     # Public methods
 
-=pod
-
-NextEvent
-NextEvents
-PrevEvents
-
-ShortList
-LongList
-
-Item
-
-=cut
-
     $loader->refresh( \@plugins, { loggedin => 0, loginid => 2 }, {} );
     $res = is($loader->action('Event::NextEvent'),1);
     diag($loader->error)    unless($res);
@@ -939,20 +926,6 @@ _startdate
 
     # -------------------------------------------------------------------------
     # Admin Link methods
-
-=pod
-
-Admin
-Add
-Edit
-Copy
-Save
-Promote
-Delete
-
-VenueSelect
-
-=cut
 
     # test bad access
 
@@ -1083,4 +1056,13 @@ VenueSelect
     $test_data->{copy}{$_} = $vars->{data}{$_}   for(qw(createdate)); # these will always be the current timestamp
     #diag("copy vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{copy},'copy check variables are as expected');
+
+=pod
+
+Promote
+
+VenueSelect
+
+=cut
+
 }
