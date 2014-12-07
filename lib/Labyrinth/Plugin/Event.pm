@@ -24,6 +24,7 @@ use base qw(Labyrinth::Plugin::Base);
 use Clone qw(clone);
 use Time::Local;
 
+use Labyrinth::Audit;
 use Labyrinth::DBUtils;
 use Labyrinth::DTUtils;
 use Labyrinth::MLUtils;
@@ -110,7 +111,7 @@ sub NextEvent {
     }
     return  unless(@rows);
 
-    $tvars{event}{$cgiparams{eventtype}}{next} = $rows[0];
+    $tvars{event}{$cgiparams{eventtypeid}}{next} = $rows[0];
 
     my @talks = $dbi->GetQuery('hash','GetEventTalks',$rows[0]->{eventid});
     if(@talks) {
@@ -140,7 +141,7 @@ sub NextEvents {
 
     my @dates;
     for my $row (@rows) {
-        push @dates, formatDate(10,$_->{listdate});
+        push @dates, formatDate(10,$row->{listdate});
     }
 
     $tvars{events}{$cgiparams{eventtypeid}}{future} = $rows[0];
@@ -164,17 +165,19 @@ sub PrevEvents {
     } else {
         @rows = $dbi->GetQuery('hash','GetPrevEvents',$timer);
     }
+    LogDebug("PrevEvents rows=".scalar(@rows));
 
     my %data;
     for my $row (@rows) {
-        $data{$row->{listdate}}->{eventid} = $row->{eventid};
-        $data{$row->{listdate}}->{date} = $row->{eventdate};
+        $data{$row->{listdate}}->{$_} = $row->{$_}  for(keys %$row);
+
+        next    unless($row->{talktitle});  # ignore talks without a title
         my %talk = map {$_ => $row->{$_}} qw(realname guest talktitle);
         push @{$data{$row->{listdate}}->{talks}}, \%talk;
 
     }
     my @data = map {$data{$_}} reverse sort keys %data;
-    $tvars{events} = \@data   if(@data);
+    $tvars{events}{$cgiparams{eventtypeid}}{past} = \@data   if(@data);
 
     if($cgiparams{eventtypeid}) {
         my $sections = Labyrinth::Plugin::Articles::Sections->new();
