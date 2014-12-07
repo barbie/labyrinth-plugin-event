@@ -491,7 +491,7 @@ sub Copy {
                     $tvars{data}{imageid},
                     $tvars{data}{align},
                     1,
-                    $tvars{data}{sponsorid},
+                    $tvars{data}{sponsorid} || 0,
                     $tvars{data}{listdate},
                     $tvars{data}{body},
                     $tvars{data}{links},
@@ -545,7 +545,7 @@ sub Save {
                     $imageid,
                     $tvars{data}{align},
                     $tvars{data}{publish},
-                    $tvars{data}{sponsorid},
+                    $tvars{data}{sponsorid} || 0,
                     $tvars{data}{listdate},
                     $tvars{data}{body},
                     $tvars{data}{links}
