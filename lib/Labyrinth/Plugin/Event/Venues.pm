@@ -86,7 +86,7 @@ Current list of venues for events.
 sub Current {
     my %venues;
     for my $event ($tvars{next},@{$tvars{future}}) {
-        $venues{$event->{venueid}}->{$_} = $event->{$_} for(qw(venueid venue venuelink address addresslink info));
+        $venues{$event->{venueid}}->{$_} = $event->{$_} for(grep {$event->{$_}} qw(venueid venue venuelink address addresslink info));
     }
     my @venues = map {$venues{$_}} sort {$venues{$a}->{venue} cmp $venues{$b}->{venue}} keys %venues;
     $tvars{venues} = \@venues   if(@venues);
