@@ -137,6 +137,7 @@ sub NextEvents {
     } else {
         @rows = $dbi->GetQuery('hash','GetNextEvents',$timer);
     }
+    LogDebug("NextEvents rows=".scalar(@rows));
     return  unless(@rows);
 
     my @dates;

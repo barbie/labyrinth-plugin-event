@@ -6,7 +6,7 @@ Changes for the Labyrinth-Plugin-Event
         - sponsorid is not mandatory for new sponsors.
         - DeleteSponsors requires a list.
         - added test data files.
-        - added sponsor and talks tests.
+        - added sponsor, talks and types tests.
         - EventSelect is now an object method.
 
 1.04    2014-04-15
