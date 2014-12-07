@@ -436,6 +436,7 @@ sub Add {
 sub Edit {
     return  unless AccessUser(EDITOR);
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
+    return  unless($tvars{data});   # no data, no event
 
     if($tvars{data}{publish} == 4 && $tvars{command} ne 'view') {
         $tvars{errcode} = 'FAILURE';
@@ -446,7 +447,7 @@ sub Edit {
     my $sponsors   = Labyrinth::Plugin::Event::Sponsors->new();
 
     $tvars{data}{align}       = $cgiparams{ALIGN0};
-    $tvars{data}{alignment}   = Alignment($tvars{data}{align});
+    $tvars{data}{alignment}   = AlignClass($tvars{data}{align});
     $tvars{data}{ddalign}     = AlignSelect($tvars{data}{align});
     $tvars{data}{name}        = UserName($tvars{data}{userid});
     $tvars{data}{ddtype}      = $eventtypes->EventTypeSelect($tvars{data}{eventtypeid},1);
@@ -487,14 +488,13 @@ sub Copy {
                     $tvars{data}{eventtime},
                     $tvars{data}{eventtypeid},
                     $tvars{data}{venueid},
-                    $tvars{data}{body},
-                    $tvars{data}{links},
                     $tvars{data}{imageid},
                     $tvars{data}{align},
                     1,
                     $tvars{data}{sponsorid},
                     $tvars{data}{listdate},
-                    formatDate(0),
+                    $tvars{data}{body},
+                    $tvars{data}{links},
                     $tvars{loginid});
 
     $cgiparams{eventid} = $dbi->IDQuery('AddEvent',@fields);

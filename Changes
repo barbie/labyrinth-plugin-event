@@ -8,6 +8,8 @@ Changes for the Labyrinth-Plugin-Event
         - added test data files.
         - added sponsor, talks and types tests.
         - EventSelect is now an object method.
+        - added permissions checks to admin methods.
+        - fixed field order for Save and Copy event.
 
 1.04    2014-04-15
         - fixed distribution name in META (thanks Neil).
