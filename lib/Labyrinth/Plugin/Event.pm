@@ -433,6 +433,7 @@ sub Add {
 }
 
 sub Edit {
+    return  unless AccessUser(EDITOR);
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
     if($tvars{data}{publish} == 4 && $tvars{command} ne 'view') {
@@ -475,6 +476,7 @@ sub Edit {
 }
 
 sub Copy {
+    return  unless AccessUser(EDITOR);
     $cgiparams{'eventid'} = $cgiparams{'LISTED'};
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
@@ -501,6 +503,7 @@ sub Copy {
 }
 
 sub Save {
+    return  unless AccessUser(EDITOR);
     return  unless AuthorCheck('GetEventByID','eventid',EDITOR);
 
     $tvars{data}{align} = $cgiparams{ALIGN0};
