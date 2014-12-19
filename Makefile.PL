@@ -17,6 +17,7 @@ WriteMakefile(
         # prereqs
         'Labyrinth'                             => '5.17',
         'Labyrinth::Plugin::Articles::Sections' => '5.06',
+        'Labyrinth::Test::Harness'              => '1.07',
         'Clone'                                 => '0',
         'Time::Local'                           => '0',
 
