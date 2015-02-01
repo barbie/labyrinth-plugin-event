@@ -2,8 +2,21 @@
 use strict;
 
 use Data::Dumper;
+use DateTime;
 use Labyrinth::Test::Harness;
 use Test::More tests => 63;
+
+my $thisyear = DateTime->now->year;
+my $date1 = DateTime->new( year => $thisyear, month => 1, day => 14, hour => 18, minute => 0, second => 0, time_zone => 'Europe/London' )->clone->add( years => 1 );
+my %date1 = ( epoch => $date1->epoch, event => sprintf "%d %s %d", $date1->day, $date1->month_abbr, $date1->year );
+my $date2 = DateTime->new( year => $thisyear, month => 1, day => 28, hour => 19, minute => 30, second => 0, time_zone => 'Europe/London' )->clone->subtract( years => 1 );
+my %date2 = ( epoch => $date2->epoch, event => sprintf "%d %s %d", $date2->day, $date2->month_abbr, $date2->year );
+my $date3 = DateTime->new( year => $thisyear, month => 1, day => 28, hour => 19, minute => 30, second => 0, time_zone => 'Europe/London' )->clone->add( years => 1 );
+my %date3 = ( epoch => $date3->epoch, event => sprintf "%d %s %d", $date3->day, $date3->month_abbr, $date3->year );
+my $date4 = DateTime->new( year => $thisyear, month => 12, day => 1, hour => 0, minute => 0, second => 0, time_zone => 'Europe/London' )->clone->subtract( years => 1 );
+my %date4 = ( epoch => $date4->epoch, event => sprintf "%d %s %d", $date4->day, $date4->month_abbr, $date4->year );
+my $date5 = DateTime->new( year => $thisyear, month => 3, day => 13, hour => 0, minute => 0, second => 0, time_zone => 'Europe/London' )->clone->subtract( years => 1 );
+my %date5 = ( epoch => $date5->epoch, event => sprintf "%d-16 %s %d", $date5->day, $date5->month_abbr, $date5->year );
 
 my $test_data = { 
     next0 => {
@@ -25,9 +38,9 @@ my $test_data = {
                 'title' => 'Birmingham.pm Social Meeting',
                 'extralink' => undef,
                 'align' => '1',
-                'eventdate' => '14 Jan 2015',
+                'eventdate' => $date1{event},
                 'eventtype' => 'Social Meeting',
-                'listdate' => '1421258400',
+                'listdate' => $date1{epoch},
                 'links' => '<a href="/meet/main" title="Social Meeting pages">Social Meetings</a>',
                 'venueid' => '4',
                 'eventid' => '4',
@@ -38,9 +51,9 @@ my $test_data = {
     next5 => {
         '5' => {
             'next' => {
-                'listdate' => '1421258400',
+                'listdate' => $date1{epoch},
                 'addresslink' => 'http://maps.google.co.uk/maps?q=B5%204TD',
-                'eventdate' => '14 Jan 2015',
+                'eventdate' => $date1{event},
                 'info' => '<h2>Directions</h2><p>In Brum.</p>',
                 'userid' => '1',
                 'eventtime' => '6pm onwards',
@@ -67,7 +80,7 @@ my $test_data = {
     nexts0 => {
         'publish' => '3',
         'venue' => 'The Dragon Inn',
-        'listdate' => '1421258400',
+        'listdate' => $date1{epoch},
         'sponsorid' => '0',
         'userid' => '1',
         'address' => 'Hurst Street, Birmingham, B5 4TD',
@@ -84,7 +97,7 @@ my $test_data = {
         'eventtype' => 'Social Meeting',
         'eventtime' => '6pm onwards',
         'info' => '<h2>Directions</h2><p>In Brum.</p>',
-        'eventdate' => '14 Jan 2015',
+        'eventdate' => $date1{event},
         'body' => 'See our meetings page for further details.',
         'title' => 'Birmingham.pm Social Meeting',
         'venuelink' => 'http://www.jdwetherspoon.co.uk/pubs/pub-details.php?PubNumber=5609'
@@ -93,7 +106,7 @@ my $test_data = {
         'sponsorid' => '0',
         'addresslink' => 'http://maps.google.co.uk/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=B7+4BB&amp;sll=53.800651,-4.064941&amp;sspn=18.409311,57.084961&amp;ie=UTF8&amp;hq=&amp;hnear=Birmingham,+West+Midlands+B7+4BB,+United+Kingdom&amp;t=h&amp;z=16',
         'eventtype' => 'Technical Meeting',
-        'listdate' => '1422473400',
+        'listdate' => $date3{epoch},
         'links' => '<a href="/tech/main" title="Technical Meeting pages">Technical Meetings</a>',
         'talks' => '1',
         'eventtypeid' => '6',
@@ -111,7 +124,7 @@ my $test_data = {
         'eventid' => '5',
         'publish' => '3',
         'extralink' => undef,
-        'eventdate' => '28 Jan 2015',
+        'eventdate' => $date3{event},
         'eventtime' => '7.30pm - 9.30pm'
     },
     nexts6intro => {
@@ -166,7 +179,7 @@ my $test_data = {
                     'imageid' => '1',
                     'venuelink' => 'http://www.wmin.ac.uk/page-4459',
                     'eventid' => undef,
-                    'listdate' => '1385856000',
+                    'listdate' => $date4{epoch},
                     'links' => '',
                     'extralink' => undef,
                     'resource' => undef,
@@ -176,11 +189,11 @@ my $test_data = {
                     'guest' => undef,
                     'realname' => undef,
                     'publish' => '3',
-                    'eventdate' => '1 Dec 2013'
+                    'eventdate' => $date4{event}
                 },
                 {
                     'venuelink' => '',
-                    'listdate' => '1363132800',
+                    'listdate' => $date5{epoch},
                     'eventid' => undef,
                     'links' => '',
                     'extralink' => undef,
@@ -191,7 +204,7 @@ my $test_data = {
                     'publish' => '3',
                     'realname' => undef,
                     'guest' => undef,
-                    'eventdate' => '13-16 Mar 2013',
+                    'eventdate' => $date5{event},
                     'address' => 'Lyon',
                     'eventtypeid' => '3',
                     'talktitle' => undef,
@@ -224,7 +237,7 @@ my $test_data = {
                     'talktitle' => 'More',
                     'eventtypeid' => '6',
                     'address' => 'Faraday Wharf, Holt Street, Birmingham, B7 4BB',
-                    'eventdate' => '28 Jan 2013',
+                    'eventdate' => $date2{event},
                     'realname' => 'guest',
                     'talks' => [
                         {
@@ -246,7 +259,7 @@ my $test_data = {
                     'resource' => '<p>some links</p>',
                     'extralink' => undef,
                     'links' => '<a href="/tech/main" title="Technical Meeting pages">Technical Meetings</a>',
-                    'listdate' => '1359401400',
+                    'listdate' => $date2{epoch},
                     'eventid' => '6',
                     'venuelink' => 'http://www.bsp-a.com'
                 },
@@ -342,9 +355,9 @@ my $test_data = {
                     ],
                     'publish' => '3',
                     'guest' => '1',
-                    'eventdate' => '28 Jan 2013',
+                    'eventdate' => $date2{event},
                     'eventid' => '6',
-                    'listdate' => '1359401400',
+                    'listdate' => $date2{epoch},
                     'venuelink' => 'http://www.bsp-a.com',
                     'extralink' => undef,
                     'links' => '<a href="/tech/main" title="Technical Meeting pages">Technical Meetings</a>',
@@ -387,13 +400,13 @@ my $test_data = {
             'imageid' => '1',
             'info' => '',
             'snippet' => 'A selection of talks regarding Perl and related subjects.',
-            'listdate' => 1422473400,
+            'listdate' => $date3{epoch},
             'publish' => '3',
             'title' => 'Birmingham.pm Technical Meeting',
             'folderid' => '1',
             'eventtime' => '7.30pm - 9.30pm',
             'venue' => 'Birmingham Science Park Aston',
-            'eventdate' => '28&nbsp;Jan&nbsp;2015',
+            'eventdate' => '28&nbsp;Jan&nbsp;' . $date3->year,
             'links' => '<a href="/tech/main" title="Technical Meeting pages">Technical Meetings</a>'
         }
     ],
@@ -414,7 +427,7 @@ my $test_data = {
                 'addresslink' => 'http://maps.google.co.uk/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=B7+4BB&amp;sll=53.800651,-4.064941&amp;sspn=18.409311,57.084961&amp;ie=UTF8&amp;hq=&amp;hnear=Birmingham,+West+Midlands+B7+4BB,+United+Kingdom&amp;t=h&amp;z=16',
                 'align' => '1',
                 'imageid' => '1',
-                'listdate' => '1422473400',
+                'listdate' => $date3{epoch},
                 'info' => '',
                 'snippet' => 'A selection of talks regarding Perl and related subjects.',
                 'folderid' => '1',
@@ -422,7 +435,7 @@ my $test_data = {
                 'title' => 'Birmingham.pm Technical Meeting',
                 'publish' => '3',
                 'links' => '<a href="/tech/main" title="Technical Meeting pages">Technical Meetings</a>',
-                'eventdate' => '28 Jan 2015',
+                'eventdate' => $date3{event},
                 'venue' => 'Birmingham Science Park Aston'
             }
         ],
@@ -441,7 +454,7 @@ my $test_data = {
         'href' => undef,
         'venue' => 'Birmingham Science Park Aston',
         'extralink' => undef,
-        'eventdate' => '28 Jan 2013',
+        'eventdate' => $date2{event},
         'eventtype' => 'Technical Meeting',
         'talks' => [
             {
@@ -484,7 +497,7 @@ my $test_data = {
             }
         ],
         'venueid' => '5',
-        'listdate' => '1359401400',
+        'listdate' => $date2{epoch},
         'sponsor' => undef,
         'eventtypeid' => '6',
         'tag' => undef,
@@ -622,9 +635,9 @@ my $test_data = {
 
     admin1 => [
         {
-            'listdate' => '1422473400',
+            'listdate' => $date3{epoch},
             'eventtype' => 'Technical Meeting',
-            'eventdate' => '28 Jan 2015',
+            'eventdate' => $date3{event},
             'align' => '1',
             'eventid' => '5',
             'imageid' => '1',
@@ -641,13 +654,13 @@ my $test_data = {
             'eventtime' => '7.30pm - 9.30pm',
             'venueid' => '5',
             'name' => 'Barbie',
-            'createdate' => '28/01/2015',
+            'createdate' => '28/01/' . $date3->year,
             'publishstate' => 'Published'
         },
         {
-            'eventdate' => '14 Jan 2015',
+            'listdate' => $date1{epoch},
+            'eventdate' => $date1{event},
             'eventtype' => 'Social Meeting',
-            'listdate' => '1421258400',
             'align' => '1',
             'imageid' => '1',
             'userid' => '1',
@@ -662,7 +675,7 @@ my $test_data = {
             'eventtime' => '6pm onwards',
             'title' => 'Birmingham.pm Social Meeting',
             'extralink' => undef,
-            'createdate' => '14/01/2015',
+            'createdate' => '14/01/' . $date1->year,
             'name' => 'Barbie',
             'venueid' => '4',
             'publishstate' => 'Published'
@@ -670,7 +683,7 @@ my $test_data = {
         {
             'publishstate' => 'Published',
             'venueid' => '2',
-            'createdate' => '01/12/2013',
+            'createdate' => '01/12/' . $date4->year,
             'name' => 'Barbie',
             'extralink' => undef,
             'eventtime' => 'all day',
@@ -687,8 +700,8 @@ my $test_data = {
             'imageid' => '1',
             'align' => '1',
             'eventtype' => 'Workshop',
-            'listdate' => '1385856000',
-            'eventdate' => '1 Dec 2013'
+            'listdate' => $date4{epoch},
+            'eventdate' => $date4{event}
         },
         {
             'title' => 'QA Hackathon',
@@ -699,19 +712,19 @@ my $test_data = {
             'sponsorid' => '0',
             'publishstate' => 'Published',
             'name' => 'Barbie',
-            'createdate' => '13/03/2013',
+            'createdate' => '13/03/' . $date4->year,
             'venueid' => '3',
             'align' => '1',
-            'eventdate' => '13-16 Mar 2013',
             'eventtype' => 'Hackathon',
-            'listdate' => '1363132800',
             'links' => '',
             'body' => '<p>A hackathon in Lyon.</p>',
             'folderid' => '1',
             'publish' => '3',
             'imageid' => '1',
             'userid' => '1',
-            'eventid' => '3'
+            'eventid' => '3',
+            'listdate' => $date5{epoch},
+            'eventdate' => $date5{event}
         },
         {
             'publish' => '3',
@@ -722,13 +735,13 @@ my $test_data = {
             'imageid' => '1',
             'userid' => '1',
             'align' => '1',
-            'listdate' => '1359401400',
+            'listdate' => $date2{epoch},
             'eventtype' => 'Technical Meeting',
-            'eventdate' => '28 Jan 2013',
+            'eventdate' => $date2{event},
             'publishstate' => 'Published',
             'venueid' => '5',
             'name' => 'Barbie',
-            'createdate' => '28/01/2013',
+            'createdate' => '28/01/' . $date2->year,
             'extralink' => undef,
             'title' => 'Birmingham.pm Technical Meeting',
             'eventtime' => '7.30pm - 9.30pm',
@@ -911,6 +924,7 @@ SKIP: {
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
     #diag("item 6 vars=".Dumper($vars));
+    $test_data->{item}{$_} = $vars->{event}{$_}  for(qw(listdate eventdate));
     is_deeply($vars->{event},$test_data->{item},'item variables are as expected');
 
     # -------------------------------------------------------------------------
@@ -994,9 +1008,8 @@ _startdate
     $res = is($loader->action('Event::Admin'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
-    #$test_data->{admin1}{$_} = $vars->{data}{$_}  for(qw(postdate)); # these will always be the current timestamp
     #diag("admin1 vars=".Dumper($vars->{data}));
-    is_deeply($vars->{data},$test_data->{admin1},'admin list variables are as expected');
+    is_deeply($vars->{data},$test_data->{admin1},'admin1 list variables are as expected');
 
 
     # Save a new page
