@@ -23,6 +23,7 @@
     "prereqs" : {
         "test" : {
             "requires": {
+                "DateTime": "0",
                 "IO::File": "0",
                 "Test::More": "0.70"
             },

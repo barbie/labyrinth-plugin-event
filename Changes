@@ -1,6 +1,8 @@
 Changes for the Labyrinth-Plugin-Event
 ======================================
 
+        - added missing test pre-requisite.
+
 1.07    2015-02-04
         - fixed date calculations in tests.
 
