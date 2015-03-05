@@ -4,7 +4,7 @@ use strict;
 use Data::Dumper;
 use DateTime;
 use Labyrinth::Test::Harness;
-use Test::More tests => 68;
+use Test::More tests => 74;
 
 my $thisyear = DateTime->now->year;
 my $date1 = DateTime->new( year => $thisyear, month => 1, day => 14, hour => 18, minute => 0, second => 0, time_zone => 'Europe/London' )->clone->add( years => 1 );
@@ -838,7 +838,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 68  unless($res);
+    skip "Unable to prep the test environment", 74  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -1084,8 +1084,13 @@ _events_list
 
 Promote
 
-VenueSelect
-
 =cut
+
+    is(Labyrinth::Plugin::Event::VenueSelect(),       '<select id="venueid" name="venueid"><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1">To Be Confirmed</option><option value="2">University of Westminster</option></select>');
+    is(Labyrinth::Plugin::Event::VenueSelect(1),      '<select id="venueid" name="venueid"><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1" selected="selected">To Be Confirmed</option><option value="2">University of Westminster</option></select>');
+    is(Labyrinth::Plugin::Event::VenueSelect(1,1),    '<select id="venueid" name="venueid"><option value="0">Select A Venue</option><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1" selected="selected">To Be Confirmed</option><option value="2">University of Westminster</option></select>');
+    is(Labyrinth::Plugin::Event::VenueSelect(1,0),    '<select id="venueid" name="venueid"><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1" selected="selected">To Be Confirmed</option><option value="2">University of Westminster</option></select>');
+    is(Labyrinth::Plugin::Event::VenueSelect(undef,1),'<select id="venueid" name="venueid"><option value="0">Select A Venue</option><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1">To Be Confirmed</option><option value="2">University of Westminster</option></select>');
+    is(Labyrinth::Plugin::Event::VenueSelect(undef,0),'<select id="venueid" name="venueid"><option value="5">Birmingham Science Park Aston</option><option value="3">Booking.com Offices, Lyon</option><option value="4">The Dragon Inn</option><option value="1">To Be Confirmed</option><option value="2">University of Westminster</option></select>');
 
 }
