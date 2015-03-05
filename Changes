@@ -1,6 +1,8 @@
 Changes for the Labyrinth-Plugin-Event
 ======================================
 
+        - added more functional tests.
+
 1.08    2015-02-18
         - added missing test pre-requisite.
 

@@ -4,7 +4,7 @@ use strict;
 use Data::Dumper;
 use DateTime;
 use Labyrinth::Test::Harness;
-use Test::More tests => 63;
+use Test::More tests => 68;
 
 my $thisyear = DateTime->now->year;
 my $date1 = DateTime->new( year => $thisyear, month => 1, day => 14, hour => 18, minute => 0, second => 0, time_zone => 'Europe/London' )->clone->add( years => 1 );
@@ -838,7 +838,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 63  unless($res);
+    skip "Unable to prep the test environment", 68  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -851,7 +851,7 @@ SKIP: {
     diag($loader->error)    unless($res);
     my $vars = $loader->vars;
     $test_data->{next0}{0}{next}{$_} = $vars->{event}{0}{next}{$_} for(qw(eventdate listdate));
-    #diag("next event all vars=".Dumper($vars));
+    diag("next event all vars=".Dumper($vars));
     is_deeply($vars->{event},$test_data->{next0},'next event all variables are as expected');
     is(scalar(@{$vars->{events}{0}{dates}}),1,'1 date returned');
 
@@ -930,11 +930,16 @@ SKIP: {
     # -------------------------------------------------------------------------
     # Internal methods
 
+    like(Labyrinth::Plugin::Event::_get_timer(),qr/\d+/,'got an epoch date');
+    my @date = Labyrinth::Plugin::Event::_startdate();
+    is(scalar(@date),3);
+    like($date[0],qr/^([1-9]|[12][0-9]|3[01])$/,'got day');
+    like($date[1],qr/^([1-9]|1[0-2])$/,'got month');
+    like($date[2],qr/^(19|20)\d\d$/,'got year');
+
 =pod
 
-_get_timer
 _events_list
-_startdate
 
 =cut
 
