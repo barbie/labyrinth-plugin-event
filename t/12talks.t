@@ -4,7 +4,7 @@ use strict;
 use Data::Dumper;
 use Labyrinth::Plugin::Event::Talks;
 use Labyrinth::Test::Harness;
-use Test::More tests => 37;
+use Test::More tests => 39;
 
 my $test_data = { 
     add => {
@@ -173,7 +173,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 37  unless($res);
+    skip "Unable to prep the test environment", 39  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -204,11 +204,8 @@ SKIP: {
     # Add a sponsor
     $loader->refresh( \@plugins, { data => undef } );
     $loader->login( 1 );
-
-    # test adding a sponsor
     $res = is($loader->action('Event::Talks::Add'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("add vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{add},'add variables are as expected');
@@ -217,10 +214,8 @@ SKIP: {
     # Edit - no data given
     $loader->refresh( \@plugins, { data => undef } );
     $loader->login( 1 );
-
     $res = is($loader->action('Event::Talks::Edit'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("edit1 vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{edit1},"base data provided, when no talk given");
@@ -229,22 +224,28 @@ SKIP: {
     # Edit - missing data given
     $loader->refresh( \@plugins, { data => undef }, { eventid => 1, talkid => 9 } );
     $loader->login( 1 );
-
     $res = is($loader->action('Event::Talks::Edit'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("edit2 vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{edit2},"talk 9 data provided");
 
     
+    # Edit - valid data given, without event
+    $loader->refresh( \@plugins, { data => {} }, { eventid => 0, talkid => 1 } );
+    $loader->login( 1 );
+    $res = is($loader->action('Event::Talks::Edit'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("edit3 vars=".Dumper($vars->{data}));
+    is_deeply($vars->{data},$test_data->{edit3},"talk 1 data provided");
+
+    
     # Edit - valid data given
     $loader->refresh( \@plugins, { data => {} }, { eventid => 1, talkid => 1 } );
     $loader->login( 1 );
-
     $res = is($loader->action('Event::Talks::Edit'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("edit3 vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{edit3},"talk 1 data provided");
@@ -253,11 +254,8 @@ SKIP: {
     # Admin access
     $loader->refresh( \@plugins, { data => {} } );
     $loader->login( 1 );
-
-    # test basic admin
     $res = is($loader->action('Event::Talks::Admin'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("admin1 vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{admin1},'admin list variables are as expected');
