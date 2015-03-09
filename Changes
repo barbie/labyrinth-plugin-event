@@ -1,6 +1,7 @@
 Changes for the Labyrinth-Plugin-Event
 ======================================
 
+1.10    2015-03-09
         - added missing GetEventType SQL phrase.
         - added even more functional tests.
 
